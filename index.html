@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-en="Refugio Madreselva — Costa Rica Vacation Home" data-es="Refugio Madreselva — Casa Vacacional en Costa Rica">Refugio Madreselva — Costa Rica Vacation Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:  #1a3a2a;
+      --green-mid:   #2d6a4f;
+      --green-light: #52b788;
+      --gold:        #c9a84c;
+      --cream:       #f5f0e8;
+      --white:       #ffffff;
+      --text-dark:   #1c2b22;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; color: var(--text-dark); background: var(--cream); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(26, 58, 42, 0.85);
+      backdrop-filter: blur(8px);
+      transition: background 0.3s;
+    }
+    nav.scrolled { background: rgba(26, 58, 42, 0.97); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); letter-spacing: 0.05em; text-decoration: none; }
+    .nav-logo span { color: var(--white); font-weight: 300; font-size: 0.85rem; display: block; letter-spacing: 0.2em; text-transform: uppercase; }
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── LANGUAGE TOGGLE ── */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
+    }
+    .lang-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+      min-width: 2rem;
+      text-align: center;
+    }
+    .lang-label.active { color: var(--gold); }
+    .toggle-track {
+      position: relative;
+      width: 44px; height: 24px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      transition: background 0.3s;
+    }
+    .toggle-track:hover { background: rgba(255,255,255,0.28); }
+    .toggle-thumb {
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 18px; height: 18px;
+      background: var(--gold);
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .toggle-track.es .toggle-thumb { transform: translateX(20px); }
+
+    /* ── HERO ── */
+    .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('Assets/images/1.jpg') center/cover no-repeat; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
+    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.12); } }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,58,42,0.35) 0%, rgba(26,58,42,0.65) 100%); }
+    .hero-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 1.5rem; color: var(--white); }
+    .hero-eyebrow { font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 1.05; margin-bottom: 1.2rem; text-shadow: 0 2px 20px rgba(0,0,0,0.4); }
+    .hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.25rem); font-weight: 300; max-width: 600px; line-height: 1.7; opacity: 0.92; margin-bottom: 2.5rem; }
+    .btn { display: inline-block; padding: 0.9rem 2.4rem; border-radius: 2px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; cursor: pointer; border: none; }
+    .btn-gold { background: var(--gold); color: var(--green-dark); }
+    .btn-gold:hover { background: #e0bc6a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.7); margin-left: 1rem; }
+    .btn-outline:hover { background: rgba(255,255,255,0.12); border-color: var(--white); }
+    .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; animation: bounce 2s infinite; }
+    .hero-scroll::after { content: ''; display: block; width: 1px; height: 40px; background: rgba(255,255,255,0.5); }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green-light); font-weight: 700; margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.2; color: var(--green-dark); margin-bottom: 1.5rem; }
+    .section-lead { font-size: 1.1rem; line-height: 1.8; color: #3a5040; max-width: 720px; }
+
+    /* ── WELCOME ── */
+    #welcome { background: var(--white); }
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .welcome-img { border-radius: 4px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+    .welcome-img img { width: 100%; display: block; }
+
+    /* ── CAROUSEL ── */
+    #gallery { background: var(--green-dark); padding: 5rem 0; }
+    #gallery .section-label { color: var(--gold); }
+    #gallery .section-title { color: var(--white); }
+    #gallery .section-inner { max-width: 1200px; padding: 0 1.5rem; }
+    .carousel { position: relative; overflow: hidden; border-radius: 4px; margin-top: 2.5rem; }
+    .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .carousel-slide { min-width: 100%; position: relative; }
+    .carousel-slide img { width: 100%; height: 580px; object-fit: cover; display: block; }
+    .carousel-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 2.5rem; background: linear-gradient(transparent, rgba(0,0,0,0.65)); color: var(--white); font-size: 1rem; font-style: italic; font-family: 'Playfair Display', serif; }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.5); color: var(--white); width: 52px; height: 52px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 5; backdrop-filter: blur(4px); }
+    .carousel-btn:hover { background: rgba(255,255,255,0.3); border-color: var(--white); }
+    .carousel-btn.prev { left: 1.25rem; }
+    .carousel-btn.next { right: 1.25rem; }
+    .carousel-dots { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1.25rem; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; border: none; transition: all 0.2s; }
+    .carousel-dot.active { background: var(--gold); transform: scale(1.3); }
+
+    /* ── WILDLIFE ── */
+    #wildlife { background: var(--cream); }
+    .wildlife-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .wildlife-card { border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); background: var(--white); transition: transform 0.3s, box-shadow 0.3s; }
+    .wildlife-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.15); }
+    .wildlife-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .wildlife-card-body { padding: 1.1rem 1.3rem; }
+    .wildlife-card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--green-dark); margin-bottom: 0.35rem; }
+    .wildlife-card-text { font-size: 0.875rem; color: #5a6e60; line-height: 1.65; }
+
+    /* ── ACTIVITIES ── */
+    #activities { background: var(--white); }
+    .activities-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+    .activity-item { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .activity-icon { width: 52px; height: 52px; background: var(--green-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .activity-item h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--green-dark); }
+    .activity-item p { font-size: 0.9rem; color: #5a6e60; line-height: 1.7; }
+
+    /* ── VIDEO ── */
+    #video { background: var(--green-dark); }
+    #video .section-label { color: var(--gold); }
+    #video .section-title { color: var(--white); }
+    #video .section-lead { color: rgba(255,255,255,0.75); }
+    .yt-thumb-link { display: block; margin-top: 2.5rem; text-decoration: none; }
+    .yt-thumb { position: relative; border-radius: 4px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4); aspect-ratio: 16/9; background: #000; }
+    .yt-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s, opacity 0.3s; }
+    .yt-thumb-link:hover .yt-thumb img { transform: scale(1.03); opacity: 0.85; }
+    .yt-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); transition: transform 0.2s; }
+    .yt-thumb-link:hover .yt-play { transform: translate(-50%, -50%) scale(1.12); }
+    .yt-label { position: absolute; bottom: 1.25rem; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.65); color: #fff; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.45rem 1.1rem; border-radius: 2px; backdrop-filter: blur(4px); white-space: nowrap; }
+
+    /* ── AMENITIES ── */
+    #amenities { background: var(--cream); }
+    .amenities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+    .amenity { background: var(--white); border-radius: 4px; padding: 1.4rem 1.2rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    .amenity-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+    .amenity h4 { font-size: 0.9rem; font-weight: 700; color: var(--green-dark); }
+
+    /* ── QUOTE ── */
+    .quote-section { background: var(--green-mid); padding: 5rem 1.5rem; text-align: center; }
+    blockquote { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-style: italic; color: var(--white); max-width: 800px; margin: 0 auto; line-height: 1.6; }
+    blockquote cite { display: block; font-family: 'Lato', sans-serif; font-style: normal; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-top: 1.5rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-info p { font-size: 1rem; color: #5a6e60; line-height: 1.8; margin-bottom: 1.5rem; }
+    .contact-detail { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--green-dark); font-weight: 700; }
+    .contact-detail span:first-child { font-size: 1.2rem; }
+    form { display: flex; flex-direction: column; gap: 1rem; }
+    form input, form textarea, form select { padding: 0.85rem 1rem; border: 1.5px solid #c8d5cc; border-radius: 3px; font-family: 'Lato', sans-serif; font-size: 0.95rem; color: var(--text-dark); background: var(--cream); transition: border-color 0.2s; outline: none; }
+    form input:focus, form textarea:focus, form select:focus { border-color: var(--green-light); }
+    form textarea { min-height: 130px; resize: vertical; }
+    form input::placeholder, form textarea::placeholder { color: #9aaa9e; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--green-dark); color: rgba(255,255,255,0.6); text-align: center; padding: 2.5rem 1.5rem; font-size: 0.85rem; }
+    footer .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 0.5rem; }
+    footer p { line-height: 1.8; }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .welcome-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+      .btn-outline { margin-left: 0; margin-top: 0.75rem; }
+      .hero-content .btn-outline { display: none; }
+      .carousel-slide img { height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    Refugio Madreselva
+    <span>Costa Rica</span>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#welcome"   data-en="Home"       data-es="Inicio">Home</a></li>
+      <li><a href="#gallery"   data-en="Gallery"    data-es="Galería">Gallery</a></li>
+      <li><a href="#wildlife"  data-en="Wildlife"   data-es="Fauna">Wildlife</a></li>
+      <li><a href="#activities"data-en="Activities" data-es="Actividades">Activities</a></li>
+      <li><a href="#video"     data-en="Video"      data-es="Video">Video</a></li>
+      <li><a href="#contact"   data-en="Contact"    data-es="Contacto">Contact</a></li>
+    </ul>
+    <!-- Language toggle -->
+    <div class="lang-toggle" id="langToggle" role="switch" aria-checked="false" aria-label="Switch language" tabindex="0">
+      <span class="lang-label active" id="labelEN">EN</span>
+      <div class="toggle-track" id="toggleTrack">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span class="lang-label" id="labelES">ES</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Uvita &bull; Puntarenas &bull; Costa Rica</p>
+    <h1 class="hero-title">Refugio Madreselva</h1>
+    <p class="hero-subtitle" data-en="Wake to the call of howler monkeys. Watch clouds drift over the Whale's Tail. Breathe in the rainforest. This is your home in paradise." data-es="Despierte al llamado de los monos aulladores. Vea las nubes sobre la Cola de Ballena. Respire la selva tropical. Este es su hogar en el paraíso.">Wake to the call of howler monkeys. Watch clouds drift over the Whale's Tail. Breathe in the rainforest. This is your home in paradise.</p>
+    <div>
+      <a href="#contact" class="btn btn-gold" data-en="Book Your Stay" data-es="Reserve su Estadía">Book Your Stay</a>
+      <a href="#welcome" class="btn btn-outline" data-en="Explore" data-es="Explorar">Explore</a>
+    </div>
+  </div>
+  <div class="hero-scroll" data-en="Scroll" data-es="Bajar">Scroll</div>
+</section>
+
+<!-- WELCOME -->
+<section id="welcome">
+  <div class="section-inner">
+    <div class="welcome-grid">
+      <div>
+        <p class="section-label" data-en="Welcome to Refugio Madreselva" data-es="Bienvenido a Refugio Madreselva">Welcome to Refugio Madreselva</p>
+        <h2 class="section-title" data-en="Where Nature Becomes Your Neighbour" data-es="Donde la Naturaleza se Convierte en su Vecina">Where Nature Becomes Your Neighbour</h2>
+        <p class="section-lead" data-en="Nestled high in the rainforest above Uvita, Refugio Madreselva is a private vacation home designed for those who seek genuine connection with nature. Whether you are a passionate birdwatcher, a wildlife photographer, or simply someone who craves peace and beauty, this is your sanctuary." data-es="Anidada en lo alto de la selva sobre Uvita, Refugio Madreselva es una casa vacacional privada diseñada para quienes buscan una conexión genuina con la naturaleza. Ya sea observador de aves, fotógrafo de vida silvestre, o simplemente alguien que anhela paz y belleza, este es su santuario.">Nestled high in the rainforest above Uvita, Refugio Madreselva is a private vacation home designed for those who seek genuine connection with nature. Whether you are a passionate birdwatcher, a wildlife photographer, or simply someone who craves peace and beauty, this is your sanctuary.</p>
+        <br />
+        <p class="section-lead" data-en="Each morning begins with the thunderous yet magical roar of howler monkeys echoing through the canopy. Sit by the infinity pool and watch clouds roll in from the Pacific, waves crash onto the iconic Whale's Tail peninsula, and a dazzling parade of birds cross the sky." data-es="Cada mañana comienza con el rugido atronador pero mágico de los monos aulladores resonando en el dosel. Siéntese junto a la piscina infinita y observe cómo las nubes llegan del Pacífico, las olas rompen en la icónica Cola de Ballena y un desfile deslumbrante de aves cruza el cielo.">Each morning begins with the thunderous yet magical roar of howler monkeys echoing through the canopy. Sit by the infinity pool and watch clouds roll in from the Pacific, waves crash onto the iconic Whale's Tail peninsula, and a dazzling parade of birds cross the sky.</p>
+        <br />
+        <a href="#gallery" class="btn btn-gold" style="margin-top:0.5rem;" data-en="View Gallery" data-es="Ver Galería">View Gallery</a>
+      </div>
+      <div class="welcome-img">
+        <img src="Assets/images/4.jpg" alt="Refugio Madreselva tropical garden and mountain view" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY CAROUSEL -->
+<section id="gallery">
+  <div class="section-inner">
+    <p class="section-label" data-en="Photo Gallery" data-es="Galería de Fotos">Photo Gallery</p>
+    <h2 class="section-title" data-en="A Glimpse of Paradise" data-es="Un Vistazo al Paraíso">A Glimpse of Paradise</h2>
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide">
+          <img src="Assets/images/1.jpg" alt="Infinity pool with ocean view" />
+          <div class="carousel-caption" data-en="The infinity pool with sweeping views over the Pacific and the Whale's Tail" data-es="La piscina infinita con vistas panorámicas al Pacífico y la Cola de Ballena">The infinity pool with sweeping views over the Pacific and the Whale's Tail</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="Assets/images/2.jpg" alt="Pool at night" />
+          <div class="carousel-caption" data-en="Evenings at Refugio Madreselva — the pool glows as the jungle wraps around you" data-es="Noches en Refugio Madreselva — la piscina brilla mientras la selva te rodea">Evenings at Refugio Madreselva — the pool glows as the jungle wraps around you</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="Assets/images/3.jpg" alt="Morning coffee with ocean view" />
+          <div class="carousel-caption" data-en="Morning coffee on the deck — the Whale's Tail stretching into the Pacific below" data-es="Café matutino en la terraza — la Cola de Ballena extendiéndose hacia el Pacífico">Morning coffee on the deck — the Whale's Tail stretching into the Pacific below</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="Assets/images/4.jpg" alt="Tropical garden and palapa" />
+          <div class="carousel-caption" data-en="Tropical bromeliads and the covered palapa overlooking the valley" data-es="Bromelias tropicales y la palapa techada con vista al valle">Tropical bromeliads and the covered palapa overlooking the valley</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="Assets/images/5.jpg" alt="Aerial view of Refugio Madreselva" />
+          <div class="carousel-caption" data-en="Refugio Madreselva from above — a jewel nestled within Costa Rica's primary rainforest" data-es="Refugio Madreselva desde arriba — una joya en el corazón del bosque primario de Costa Rica">Refugio Madreselva from above — a jewel nestled within Costa Rica's primary rainforest</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="Assets/images/Bird1.jpg" alt="Red-capped Manakin" />
+          <div class="carousel-caption" data-en="The Red-capped Manakin — one of hundreds of bird species found on the property" data-es="El Saltarín Cabecirrojo — una de las cientos de especies de aves en la propiedad">The Red-capped Manakin — one of hundreds of bird species found on the property</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="Assets/images/Bird2.jpg" alt="Hummingbird" />
+          <div class="carousel-caption" data-en="A hummingbird perches on the edge of a bromeliad leaf" data-es="Un colibrí se posa en el borde de una hoja de bromelia">A hummingbird perches on the edge of a bromeliad leaf</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="Assets/images/Monkeys.jpg" alt="Howler monkeys" />
+          <div class="carousel-caption" data-en="Howler monkeys in the canopy — your morning alarm clock at Refugio Madreselva" data-es="Monos aulladores en el dosel — su despertador matutino en Refugio Madreselva">Howler monkeys in the canopy — your morning alarm clock at Refugio Madreselva</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="Assets/images/Frog.jpg" alt="Red-eyed Tree Frog" />
+          <div class="carousel-caption" data-en="The iconic Red-eyed Tree Frog — a nightly visitor to the gardens" data-es="La icónica Rana de Ojos Rojos — visitante nocturno de los jardines">The iconic Red-eyed Tree Frog — a nightly visitor to the gardens</div>
+        </div>
+      </div>
+      <button class="carousel-btn prev" id="prevBtn" aria-label="Previous">&#8592;</button>
+      <button class="carousel-btn next" id="nextBtn" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</section>
+
+<!-- WILDLIFE -->
+<section id="wildlife">
+  <div class="section-inner">
+    <p class="section-label" data-en="Wildlife &amp; Nature" data-es="Fauna &amp; Naturaleza">Wildlife &amp; Nature</p>
+    <h2 class="section-title" data-en="Every Walk is an Adventure" data-es="Cada Caminata es una Aventura">Every Walk is an Adventure</h2>
+    <p class="section-lead" data-en="Step beyond the pool deck and into a living rainforest teeming with life. A short stroll through our forested trail leads you to a hidden waterfall where nature's soundtrack is all you hear." data-es="Salga de la terraza de la piscina y entre a una selva viva rebosante de vida. Un corto paseo por nuestro sendero boscoso lo lleva a una cascada escondida donde la banda sonora de la naturaleza es todo lo que escucha.">Step beyond the pool deck and into a living rainforest teeming with life. A short stroll through our forested trail leads you to a hidden waterfall where nature's soundtrack is all you hear.</p>
+    <div class="wildlife-grid">
+      <div class="wildlife-card">
+        <img src="Assets/images/Bird1.jpg" alt="Red-capped Manakin" />
+        <div class="wildlife-card-body">
+          <h3 class="wildlife-card-title" data-en="Exceptional Birding" data-es="Observación de Aves Excepcional">Exceptional Birding</h3>
+          <p class="wildlife-card-text" data-en="With hundreds of species on the property and surrounding reserve, birdwatchers will be in heaven. Toucans, manakins, hummingbirds, and tanagers are everyday sightings." data-es="Con cientos de especies en la propiedad y la reserva circundante, los observadores de aves estarán en el paraíso. Tucanes, saltarines, colibríes y tángaras son avistamientos cotidianos.">With hundreds of species on the property and surrounding reserve, birdwatchers will be in heaven. Toucans, manakins, hummingbirds, and tanagers are everyday sightings.</p>
+        </div>
+      </div>
+      <div class="wildlife-card">
+        <img src="Assets/images/Monkeys.jpg" alt="Howler monkeys" />
+        <div class="wildlife-card-body">
+          <h3 class="wildlife-card-title" data-en="Monkeys &amp; Mammals" data-es="Monos &amp; Mamíferos">Monkeys &amp; Mammals</h3>
+          <p class="wildlife-card-text" data-en="Howler and capuchin monkeys roam the canopy above. With a little patience you may also spot sloths, anteaters, coatimundis, and agoutis on the forest floor." data-es="Monos aulladores y capuchinos recorren el dosel. Con un poco de paciencia también puede avistar perezosos, osos hormigueros, pizotes y guatusas en el suelo del bosque.">Howler and capuchin monkeys roam the canopy above. With a little patience you may also spot sloths, anteaters, coatimundis, and agoutis on the forest floor.</p>
+        </div>
+      </div>
+      <div class="wildlife-card">
+        <img src="Assets/images/Frog.jpg" alt="Red-eyed Tree Frog" />
+        <div class="wildlife-card-body">
+          <h3 class="wildlife-card-title" data-en="Frogs &amp; Butterflies" data-es="Ranas &amp; Mariposas">Frogs &amp; Butterflies</h3>
+          <p class="wildlife-card-text" data-en="The gardens come alive after dark with red-eyed tree frogs and strawberry poison dart frogs. By day, electric-blue morpho butterflies drift through shafts of sunlight." data-es="Los jardines cobran vida al anochecer con ranas de ojos rojos y ranas dardo fresa. De día, las mariposas morpho azul eléctrico flotan entre los rayos de sol.">The gardens come alive after dark with red-eyed tree frogs and strawberry poison dart frogs. By day, electric-blue morpho butterflies drift through shafts of sunlight.</p>
+        </div>
+      </div>
+      <div class="wildlife-card">
+        <img src="Assets/images/Bird2.jpg" alt="Hummingbird" />
+        <div class="wildlife-card-body">
+          <h3 class="wildlife-card-title" data-en="A Photographer's Dream" data-es="El Sueño de un Fotógrafo">A Photographer's Dream</h3>
+          <p class="wildlife-card-text" data-en="From macro shots of poison dart frogs to sweeping panoramas of the Pacific coastline, every corner of Refugio Madreselva offers a frame-worthy moment." data-es="Desde tomas macro de ranas dardo hasta panorámicas del litoral Pacífico, cada rincón de Refugio Madreselva ofrece un momento digno de ser encuadrado.">From macro shots of poison dart frogs to sweeping panoramas of the Pacific coastline, every corner of Refugio Madreselva offers a frame-worthy moment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <div class="section-inner">
+    <p class="section-label" data-en="Things To Do" data-es="Qué Hacer">Things To Do</p>
+    <h2 class="section-title" data-en="Days Filled With Wonder" data-es="Días Llenos de Maravillas">Days Filled With Wonder</h2>
+    <p class="section-lead" data-en="Whether you want pure relaxation or immersive nature experiences, Refugio Madreselva offers it all — right at your doorstep." data-es="Ya sea que desee relajación pura o experiencias inmersivas en la naturaleza, Refugio Madreselva lo ofrece todo — justo en su puerta.">Whether you want pure relaxation or immersive nature experiences, Refugio Madreselva offers it all — right at your doorstep.</p>
+    <div class="activities-list">
+      <div class="activity-item">
+        <div class="activity-icon">🦜</div>
+        <h3 data-en="Birdwatching" data-es="Observación de Aves">Birdwatching</h3>
+        <p data-en="Guided or self-guided birding walks through our private trail and surrounding primary forest. Bring your binoculars!" data-es="Caminatas de observación guiadas o autoguiadas por nuestro sendero privado y el bosque primario circundante. ¡Traiga sus binoculares!">Guided or self-guided birding walks through our private trail and surrounding primary forest. Bring your binoculars!</p>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">🥾</div>
+        <h3 data-en="Forest Hiking" data-es="Senderismo en el Bosque">Forest Hiking</h3>
+        <p data-en="Our forested trail winds through the jungle to a serene waterfall — a perfect morning or afternoon escape." data-es="Nuestro sendero boscoso serpentea por la selva hasta una cascada serena — un escape perfecto por la mañana o la tarde.">Our forested trail winds through the jungle to a serene waterfall — a perfect morning or afternoon escape.</p>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">🏊</div>
+        <h3 data-en="Infinity Pool" data-es="Piscina Infinita">Infinity Pool</h3>
+        <p data-en="Float in the pool while watching the clouds drift over the mountains and the Pacific shimmer far below." data-es="Flote en la piscina mientras ve las nubes deslizarse sobre las montañas y el Pacífico brillar a lo lejos.">Float in the pool while watching the clouds drift over the mountains and the Pacific shimmer far below.</p>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">📷</div>
+        <h3 data-en="Wildlife Photography" data-es="Fotografía de Vida Silvestre">Wildlife Photography</h3>
+        <p data-en="Morpho butterflies, tree frogs, manakins, and hummingbirds — your lens will never run out of subjects." data-es="Mariposas morpho, ranas arborícolas, saltarines y colibríes — su lente nunca se quedará sin sujetos.">Morpho butterflies, tree frogs, manakins, and hummingbirds — your lens will never run out of subjects.</p>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">🌊</div>
+        <h3 data-en="Whale's Tail Beach" data-es="Playa Cola de Ballena">Whale's Tail Beach</h3>
+        <p data-en="A short drive to the famous Whale's Tail sandbar in Marino Ballena National Park for snorkelling and whale watching." data-es="Un corto viaje al famoso banco de arena Cola de Ballena en el Parque Nacional Marino Ballena para bucear y ver ballenas.">A short drive to the famous Whale's Tail sandbar in Marino Ballena National Park for snorkelling and whale watching.</p>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">🌅</div>
+        <h3 data-en="Sunrise &amp; Sunsets" data-es="Amaneceres &amp; Atardeceres">Sunrise &amp; Sunsets</h3>
+        <p data-en="Watch the sky turn gold and pink over the Pacific from the comfort of your hammock or pool deck." data-es="Vea el cielo tornarse dorado y rosado sobre el Pacífico desde la comodidad de su hamaca o terraza de la piscina.">Watch the sky turn gold and pink over the Pacific from the comfort of your hammock or pool deck.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <blockquote>
+    <span data-en="&ldquo;Each morning you will awake to the call of howler monkeys, surrounded by the wonders of nature — birds fly everywhere, the jungle breathes, and time gently stands still.&rdquo;" data-es="&ldquo;Cada mañana despertará al llamado de los monos aulladores, rodeado de las maravillas de la naturaleza — los pájaros vuelan por todas partes, la selva respira y el tiempo se detiene suavemente.&rdquo;">&ldquo;Each morning you will awake to the call of howler monkeys, surrounded by the wonders of nature — birds fly everywhere, the jungle breathes, and time gently stands still.&rdquo;</span>
+    <cite>— Refugio Madreselva, Costa Rica</cite>
+  </blockquote>
+</div>
+
+<!-- VIDEO -->
+<section id="video">
+  <div class="section-inner">
+    <p class="section-label" data-en="Experience Refugio Madreselva" data-es="Vive Refugio Madreselva">Experience Refugio Madreselva</p>
+    <h2 class="section-title" data-en="See It For Yourself" data-es="Véalo por Usted Mismo">See It For Yourself</h2>
+    <p class="section-lead" data-en="Words and photos can only go so far. Watch the video to feel the magic of this remarkable corner of Costa Rica." data-es="Las palabras y las fotos solo llegan hasta cierto punto. Vea el video para sentir la magia de este extraordinario rincón de Costa Rica.">Words and photos can only go so far. Watch the video to feel the magic of this remarkable corner of Costa Rica.</p>
+    <a href="https://www.youtube.com/watch?v=2MinCxctpUg" target="_blank" rel="noopener noreferrer" class="yt-thumb-link" aria-label="Watch Refugio Madreselva on YouTube">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/2MinCxctpUg/maxresdefault.jpg" alt="Refugio Madreselva Costa Rica video thumbnail" onerror="this.src='https://img.youtube.com/vi/2MinCxctpUg/hqdefault.jpg'" />
+        <div class="yt-play">
+          <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+        </div>
+        <div class="yt-label" data-en="Watch on YouTube" data-es="Ver en YouTube">Watch on YouTube</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities">
+  <div class="section-inner">
+    <p class="section-label" data-en="The Home" data-es="La Casa">The Home</p>
+    <h2 class="section-title" data-en="Comfort Meets the Rainforest" data-es="Confort en la Selva Tropical">Comfort Meets the Rainforest</h2>
+    <p class="section-lead" data-en="Refugio Madreselva is fully equipped to make your stay effortless — so you can focus entirely on the nature all around you." data-es="Refugio Madreselva está completamente equipada para hacer su estadía sin esfuerzo — para que pueda concentrarse en la naturaleza que lo rodea.">Refugio Madreselva is fully equipped to make your stay effortless — so you can focus entirely on the nature all around you.</p>
+    <div class="amenities-grid">
+      <div class="amenity"><div class="amenity-icon">🏠</div><h4 data-en="Private Villa" data-es="Villa Privada">Private Villa</h4></div>
+      <div class="amenity"><div class="amenity-icon">🏊</div><h4 data-en="Infinity Pool" data-es="Piscina Infinita">Infinity Pool</h4></div>
+      <div class="amenity"><div class="amenity-icon">🛏️</div><h4 data-en="Multiple Bedrooms" data-es="Múltiples Habitaciones">Multiple Bedrooms</h4></div>
+      <div class="amenity"><div class="amenity-icon">🍳</div><h4 data-en="Full Kitchen" data-es="Cocina Completa">Full Kitchen</h4></div>
+      <div class="amenity"><div class="amenity-icon">📶</div><h4 data-en="High-Speed WiFi" data-es="WiFi de Alta Velocidad">High-Speed WiFi</h4></div>
+      <div class="amenity"><div class="amenity-icon">🌿</div><h4 data-en="Hiking Trails" data-es="Senderos">Hiking Trails</h4></div>
+      <div class="amenity"><div class="amenity-icon">🌊</div><h4 data-en="Ocean Views" data-es="Vistas al Océano">Ocean Views</h4></div>
+      <div class="amenity"><div class="amenity-icon">🦋</div><h4 data-en="Private Jungle" data-es="Selva Privada">Private Jungle</h4></div>
+      <div class="amenity"><div class="amenity-icon">🌅</div><h4 data-en="Covered Palapa" data-es="Palapa Techada">Covered Palapa</h4></div>
+      <div class="amenity"><div class="amenity-icon">🔒</div><h4 data-en="Gated &amp; Secure" data-es="Cerrado y Seguro">Gated &amp; Secure</h4></div>
+      <div class="amenity"><div class="amenity-icon">🚗</div><h4 data-en="Parking" data-es="Estacionamiento">Parking</h4></div>
+      <div class="amenity"><div class="amenity-icon">🛁</div><h4 data-en="A/C &amp; Hot Water" data-es="A/C &amp; Agua Caliente">A/C &amp; Hot Water</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-label" data-en="Get In Touch" data-es="Contáctenos">Get In Touch</p>
+        <h2 class="section-title" data-en="Plan Your Stay" data-es="Planifique su Estadía">Plan Your Stay</h2>
+        <p data-en="Ready to escape to the rainforest? We would love to welcome you to Refugio Madreselva. Send us a message with your travel dates and we will get back to you promptly." data-es="¿Listo para escapar a la selva? Nos encantaría darle la bienvenida a Refugio Madreselva. Envíenos un mensaje con sus fechas de viaje y nos comunicaremos con usted a la brevedad.">Ready to escape to the rainforest? We would love to welcome you to Refugio Madreselva. Send us a message with your travel dates and we will get back to you promptly.</p>
+        <div class="contact-detail"><span>📍</span><span>Uvita, Puntarenas, Costa Rica</span></div>
+        <div class="contact-detail"><span>✉️</span><span>info@madreselvacr.com</span></div>
+        <div class="contact-detail"><span>🌐</span><span data-en="Available year-round" data-es="Disponible todo el año">Available year-round</span></div>
+        <br />
+        <img src="Assets/images/5.jpg" alt="Aerial view of Refugio Madreselva" style="width:100%;border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,0.12);" />
+      </div>
+      <div>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <input type="text"  name="name"    id="inputName"    placeholder="Your Name"              data-en-placeholder="Your Name"              data-es-placeholder="Su Nombre"              required />
+          <input type="email" name="email"   id="inputEmail"   placeholder="Email Address"          data-en-placeholder="Email Address"          data-es-placeholder="Correo Electrónico"     required />
+          <input type="text"  name="dates"   id="inputDates"   placeholder="Preferred Travel Dates" data-en-placeholder="Preferred Travel Dates" data-es-placeholder="Fechas de Viaje Preferidas" />
+          <select name="guests" id="selectGuests">
+            <option value="" disabled selected data-en="Number of Guests" data-es="Número de Huéspedes">Number of Guests</option>
+            <option data-en="1–2 guests" data-es="1–2 huéspedes">1–2 guests</option>
+            <option data-en="3–4 guests" data-es="3–4 huéspedes">3–4 guests</option>
+            <option data-en="5–6 guests" data-es="5–6 huéspedes">5–6 guests</option>
+            <option data-en="7+ guests"  data-es="7+ huéspedes">7+ guests</option>
+          </select>
+          <textarea name="message" id="inputMessage" placeholder="Tell us about your trip — interests, questions, special requests…" data-en-placeholder="Tell us about your trip — interests, questions, special requests…" data-es-placeholder="Cuéntenos sobre su viaje — intereses, preguntas, solicitudes especiales…"></textarea>
+          <button type="submit" class="btn btn-gold" style="width:100%;padding:1rem;font-size:0.9rem;" data-en="Send Enquiry" data-es="Enviar Consulta">Send Enquiry</button>
+        </form>
+        <p id="formSuccess" style="display:none;color:#2d6a4f;font-weight:700;margin-top:1rem;padding:1rem;background:#e8f5ee;border-radius:4px;">
+          <span data-en="✓ Thank you! We will be in touch soon." data-es="✓ ¡Gracias! Nos comunicaremos pronto.">✓ Thank you! We will be in touch soon.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Refugio Madreselva</div>
+  <p>Uvita, Puntarenas &bull; Costa Rica</p>
+  <p style="margin-top:0.5rem;">&copy; 2025 Refugio Madreselva &mdash; <span data-en="All rights reserved" data-es="Todos los derechos reservados">All rights reserved</span> &bull; <a href="mailto:info@madreselvacr.com">info@madreselvacr.com</a></p>
+</footer>
+
+<script>
+  /* ── NAV SCROLL ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+  /* ── CAROUSEL ── */
+  const track = document.getElementById('carouselTrack');
+  const slides = track.querySelectorAll('.carousel-slide');
+  const dotsContainer = document.getElementById('carouselDots');
+  let current = 0, autoTimer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateDots() {
+    dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+  function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    updateDots();
+    resetAuto();
+  }
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+  document.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') goTo(current - 1); if (e.key === 'ArrowRight') goTo(current + 1); });
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - touchStartX; if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1); });
+  function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(() => goTo(current + 1), 5000); }
+  resetAuto();
+
+  /* ── CONTACT FORM ── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  /* ── LANGUAGE TOGGLE ── */
+  let lang = 'en';
+  const toggleTrack = document.getElementById('toggleTrack');
+  const labelEN     = document.getElementById('labelEN');
+  const labelES     = document.getElementById('labelES');
+  const langToggle  = document.getElementById('langToggle');
+
+  function applyLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+
+    // Swap all [data-en] / [data-es] text nodes
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-' + l);
+    });
+
+    // Swap placeholders on inputs/textareas
+    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+      el.placeholder = el.getAttribute('data-' + l + '-placeholder');
+    });
+
+    // Swap <select> option text
+    document.querySelectorAll('select option[data-en]').forEach(opt => {
+      opt.textContent = opt.getAttribute('data-' + l);
+    });
+
+    // Update page title
+    const titleEl = document.querySelector('title');
+    if (titleEl) titleEl.textContent = titleEl.getAttribute('data-' + l);
+
+    // Toggle UI
+    if (l === 'es') {
+      toggleTrack.classList.add('es');
+      labelEN.classList.remove('active');
+      labelES.classList.add('active');
+      langToggle.setAttribute('aria-checked', 'true');
+    } else {
+      toggleTrack.classList.remove('es');
+      labelEN.classList.add('active');
+      labelES.classList.remove('active');
+      langToggle.setAttribute('aria-checked', 'false');
+    }
+  }
+
+  function toggleLang() { applyLang(lang === 'en' ? 'es' : 'en'); }
+
+  toggleTrack.addEventListener('click', toggleLang);
+  langToggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleLang(); } });
+</script>
+</body>
+</html>
