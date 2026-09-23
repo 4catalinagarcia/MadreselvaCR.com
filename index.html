@@ -130,13 +130,32 @@
 
     /* ── WILDLIFE ── */
     #wildlife { background: var(--cream); }
-    .wildlife-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .wildlife-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
     .wildlife-card { border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); background: var(--white); transition: transform 0.3s, box-shadow 0.3s; }
     .wildlife-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.15); }
     .wildlife-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
     .wildlife-card-body { padding: 1.1rem 1.3rem; }
     .wildlife-card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--green-dark); margin-bottom: 0.35rem; }
     .wildlife-card-text { font-size: 0.875rem; color: #5a6e60; line-height: 1.65; }
+    @media (max-width: 900px) { .wildlife-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .wildlife-grid { grid-template-columns: 1fr; } }
+    .ebird-callout { margin-top: 2.5rem; padding: 2rem; background: var(--green-dark); border-radius: 4px; }
+    .ebird-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 0.4rem; }
+    .ebird-text { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6; max-width: 620px; }
+    .ebird-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.6rem 0; }
+    .ebird-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 1rem; text-align: center; }
+    .ebird-stat-num { display: block; font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); line-height: 1.1; }
+    .ebird-stat-label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .ebird-subtitle { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .ebird-recent { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 2.5rem; }
+    .ebird-recent li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .ebird-bird { display: flex; flex-direction: column; }
+    .ebird-bird-name { color: var(--white); font-weight: 700; font-size: 0.95rem; }
+    .ebird-bird em { color: rgba(255,255,255,0.55); font-size: 0.8rem; }
+    .ebird-date { color: rgba(255,255,255,0.7); font-size: 0.8rem; white-space: nowrap; }
+    .ebird-updated { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 0.8rem; }
+    .ebird-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
+    @media (max-width: 600px) { .ebird-callout { padding: 1.5rem 1.1rem; } .ebird-stats { gap: 0.5rem; } .ebird-stat { padding: 0.8rem 0.4rem; } .ebird-stat-num { font-size: 1.7rem; } .ebird-stat-label { font-size: 0.65rem; letter-spacing: 0.05em; } .ebird-recent { grid-template-columns: 1fr; } }
 
     /* ── ACTIVITIES ── */
     #activities { background: var(--white); }
@@ -318,36 +337,78 @@
 <section id="wildlife">
   <div class="section-inner">
     <p class="section-label" data-en="Wildlife &amp; Nature" data-es="Fauna &amp; Naturaleza">Wildlife &amp; Nature</p>
-    <h2 class="section-title" data-en="Every Walk is an Adventure" data-es="Cada Caminata es una Aventura">Every Walk is an Adventure</h2>
-    <p class="section-lead" data-en="Step beyond the pool deck and into a living rainforest teeming with life. A short stroll through our forested trail leads you to a hidden waterfall where nature's soundtrack is all you hear." data-es="Salga de la terraza de la piscina y entre a una selva viva rebosante de vida. Un corto paseo por nuestro sendero boscoso lo lleva a una cascada escondida donde la banda sonora de la naturaleza es todo lo que escucha.">Step beyond the pool deck and into a living rainforest teeming with life. A short stroll through our forested trail leads you to a hidden waterfall where nature's soundtrack is all you hear.</p>
+    <h2 class="section-title" data-en="A Paradise for Birdwatchers" data-es="Un Paraíso para los Observadores de Aves">A Paradise for Birdwatchers</h2>
+    <p class="section-lead" data-en="Nestled in the lush mountains above Uvita, Refugio Madreselva is a vibrant sanctuary for tropical birdlife. Our 24-acre private rainforest refuge offers a peaceful habitat for both resident and migratory species. Grab your binoculars and check out our official Refugio Madreselva eBird Hotspot to see recent sightings, track local species, and discover what&rsquo;s flying through our canopy right now!" data-es="Enclavado en las exuberantes montañas sobre Uvita, Refugio Madreselva es un santuario vibrante para la avifauna tropical. Nuestro refugio privado de 24 acres de bosque lluvioso ofrece un hábitat tranquilo tanto para especies residentes como migratorias. ¡Tome sus binoculares y visite nuestro punto oficial de eBird, Refugio Madreselva, para ver avistamientos recientes, seguir las especies locales y descubrir qué está volando por nuestro dosel ahora mismo!">Nestled in the lush mountains above Uvita, Refugio Madreselva is a vibrant sanctuary for tropical birdlife. Our 24-acre private rainforest refuge offers a peaceful habitat for both resident and migratory species. Grab your binoculars and check out our official Refugio Madreselva eBird Hotspot to see recent sightings, track local species, and discover what&rsquo;s flying through our canopy right now!</p>
     <div class="wildlife-grid">
       <div class="wildlife-card">
-        <img src="Assets/images/Bird1.jpg" alt="Red-capped Manakin" />
+        <img src="Assets/images/Fiery-billed_Aracari.jpg" alt="Fiery-billed Aracari" loading="lazy" />
         <div class="wildlife-card-body">
-          <h3 class="wildlife-card-title" data-en="Exceptional Birding" data-es="Observación de Aves Excepcional">Exceptional Birding</h3>
-          <p class="wildlife-card-text" data-en="With hundreds of species on the property and surrounding reserve, birdwatchers will be in heaven. Toucans, manakins, hummingbirds, and tanagers are everyday sightings." data-es="Con cientos de especies en la propiedad y la reserva circundante, los observadores de aves estarán en el paraíso. Tucanes, saltarines, colibríes y tángaras son avistamientos cotidianos.">With hundreds of species on the property and surrounding reserve, birdwatchers will be in heaven. Toucans, manakins, hummingbirds, and tanagers are everyday sightings.</p>
+          <h3 class="wildlife-card-title" data-en="Fiery-billed Aracari" data-es="Tucancillo Piquianaranjado">Fiery-billed Aracari</h3>
+          <p class="wildlife-card-text" data-en="A small, colorful toucan found only on the Pacific slope of Costa Rica and western Panama. Look for its fiery orange bill as family groups move noisily through the canopy." data-es="Un pequeño y colorido tucán que solo se encuentra en la vertiente del Pacífico de Costa Rica y el oeste de Panamá. Busque su pico anaranjado encendido mientras grupos familiares recorren ruidosamente el dosel.">A small, colorful toucan found only on the Pacific slope of Costa Rica and western Panama. Look for its fiery orange bill as family groups move noisily through the canopy.</p>
         </div>
       </div>
       <div class="wildlife-card">
-        <img src="Assets/images/Monkeys.jpg" alt="Howler monkeys" />
+        <img src="Assets/images/Golden-naped_Woodpecker.jpg" alt="Golden-naped Woodpecker" loading="lazy" />
         <div class="wildlife-card-body">
-          <h3 class="wildlife-card-title" data-en="Monkeys &amp; Mammals" data-es="Monos &amp; Mamíferos">Monkeys &amp; Mammals</h3>
-          <p class="wildlife-card-text" data-en="Howler and capuchin monkeys roam the canopy above. With a little patience you may also spot sloths, anteaters, coatimundis, and agoutis on the forest floor." data-es="Monos aulladores y capuchinos recorren el dosel. Con un poco de paciencia también puede avistar perezosos, osos hormigueros, pizotes y guatusas en el suelo del bosque.">Howler and capuchin monkeys roam the canopy above. With a little patience you may also spot sloths, anteaters, coatimundis, and agoutis on the forest floor.</p>
+          <h3 class="wildlife-card-title" data-en="Golden-naped Woodpecker" data-es="Carpintero Nuquidorado">Golden-naped Woodpecker</h3>
+          <p class="wildlife-card-text" data-en="A regional specialty with a bright golden nape and a bold white stripe down its black back. Pairs are often heard drumming and calling from tall dead trees." data-es="Una especialidad regional con una nuca dorada brillante y una marcada franja blanca en su espalda negra. Las parejas suelen escucharse tamborileando y llamando desde árboles secos altos.">A regional specialty with a bright golden nape and a bold white stripe down its black back. Pairs are often heard drumming and calling from tall dead trees.</p>
         </div>
       </div>
       <div class="wildlife-card">
-        <img src="Assets/images/Frog.jpg" alt="Red-eyed Tree Frog" />
+        <img src="Assets/images/Green_Honeycreeper.jpg" alt="Green Honeycreeper" loading="lazy" style="object-position: 45% 42%;" />
         <div class="wildlife-card-body">
-          <h3 class="wildlife-card-title" data-en="Frogs &amp; Butterflies" data-es="Ranas &amp; Mariposas">Frogs &amp; Butterflies</h3>
-          <p class="wildlife-card-text" data-en="The gardens come alive after dark with red-eyed tree frogs and strawberry poison dart frogs. By day, electric-blue morpho butterflies drift through shafts of sunlight." data-es="Los jardines cobran vida al anochecer con ranas de ojos rojos y ranas dardo fresa. De día, las mariposas morpho azul eléctrico flotan entre los rayos de sol.">The gardens come alive after dark with red-eyed tree frogs and strawberry poison dart frogs. By day, electric-blue morpho butterflies drift through shafts of sunlight.</p>
+          <h3 class="wildlife-card-title" data-en="Green Honeycreeper" data-es="Mielero Verde">Green Honeycreeper</h3>
+          <p class="wildlife-card-text" data-en="Females are a vivid leaf green, while males glow iridescent blue-green with a black head; both have a bright yellow bill. Watch for them feeding on fruit and nectar with mixed flocks of tanagers." data-es="Las hembras son de un verde hoja intenso, mientras que los machos brillan en un verde azulado iridiscente con cabeza negra; ambos tienen el pico amarillo. Obsérvelos alimentándose de frutas y néctar junto a bandadas mixtas de tángaras.">Females are a vivid leaf green, while males glow iridescent blue-green with a black head; both have a bright yellow bill. Watch for them feeding on fruit and nectar with mixed flocks of tanagers.</p>
         </div>
       </div>
       <div class="wildlife-card">
-        <img src="Assets/images/Bird2.jpg" alt="Hummingbird" />
+        <img src="Assets/images/Eye-ringed_Flatbill.jpg" alt="Eye-ringed Flatbill" loading="lazy" />
         <div class="wildlife-card-body">
-          <h3 class="wildlife-card-title" data-en="A Photographer's Dream" data-es="El Sueño de un Fotógrafo">A Photographer's Dream</h3>
-          <p class="wildlife-card-text" data-en="From macro shots of poison dart frogs to sweeping panoramas of the Pacific coastline, every corner of Refugio Madreselva offers a frame-worthy moment." data-es="Desde tomas macro de ranas dardo hasta panorámicas del litoral Pacífico, cada rincón de Refugio Madreselva ofrece un momento digno de ser encuadrado.">From macro shots of poison dart frogs to sweeping panoramas of the Pacific coastline, every corner of Refugio Madreselva offers a frame-worthy moment.</p>
+          <h3 class="wildlife-card-title" data-en="Eye-ringed Flatbill" data-es="Piquiplano de Anteojos">Eye-ringed Flatbill</h3>
+          <p class="wildlife-card-text" data-en="A quiet flycatcher of the shady understory, easily recognized by its bold white eye-ring and broad, flat bill. It often sits motionless before sallying out for insects." data-es="Un mosquerito discreto del sotobosque sombreado, fácil de reconocer por su marcado anillo ocular blanco y su pico ancho y plano. A menudo permanece inmóvil antes de lanzarse tras los insectos.">A quiet flycatcher of the shady understory, easily recognized by its bold white eye-ring and broad, flat bill. It often sits motionless before sallying out for insects.</p>
         </div>
+      </div>
+      <div class="wildlife-card">
+        <img src="Assets/images/White-Crested_Coquette.jpg" alt="White-crested Coquette" loading="lazy" />
+        <div class="wildlife-card-body">
+          <h3 class="wildlife-card-title" data-en="White-crested Coquette" data-es="Coqueta Crestiblanca">White-crested Coquette</h3>
+          <p class="wildlife-card-text" data-en="One of the smallest and most sought-after hummingbirds in the region, found only in southern Costa Rica and western Panama. The male sports a striking white crest." data-es="Uno de los colibríes más pequeños y buscados de la región, presente solo en el sur de Costa Rica y el oeste de Panamá. El macho luce una llamativa cresta blanca.">One of the smallest and most sought-after hummingbirds in the region, found only in southern Costa Rica and western Panama. The male sports a striking white crest.</p>
+        </div>
+      </div>
+      <div class="wildlife-card">
+        <img src="Assets/images/White-whiskered_Puffbird.jpg" alt="White-whiskered Puffbird" loading="lazy" />
+        <div class="wildlife-card-body">
+          <h3 class="wildlife-card-title" data-en="White-whiskered Puffbird" data-es="Buco Barbiblanco">White-whiskered Puffbird</h3>
+          <p class="wildlife-card-text" data-en="Named for the white &ldquo;whiskers&rdquo; around its bill, this puffbird perches patiently in the forest understory, waiting to snatch large insects and small lizards." data-es="Llamado así por los &ldquo;bigotes&rdquo; blancos alrededor de su pico, este buco se posa pacientemente en el sotobosque, esperando atrapar insectos grandes y pequeñas lagartijas.">Named for the white &ldquo;whiskers&rdquo; around its bill, this puffbird perches patiently in the forest understory, waiting to snatch large insects and small lizards.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ebird-callout">
+      <div class="ebird-head">
+        <h3 class="ebird-title" data-en="Recent Sightings on eBird" data-es="Avistamientos Recientes en eBird">Recent Sightings on eBird</h3>
+        <p class="ebird-text" data-en="Refugio Madreselva is an official eBird hotspot. Here are the latest species recorded by birders on the property." data-es="Refugio Madreselva es un punto de observación oficial en eBird. Estas son las especies más recientes registradas por observadores en la propiedad.">Refugio Madreselva is an official eBird hotspot. Here are the latest species recorded by birders on the property.</p>
+      </div>
+      <div class="ebird-stats">
+        <div class="ebird-stat"><span class="ebird-stat-num">180</span><span class="ebird-stat-label" data-en="Species all time" data-es="Especies en total">Species all time</span></div>
+        <div class="ebird-stat"><span class="ebird-stat-num">130</span><span class="ebird-stat-label" data-en="Species in 2026" data-es="Especies en 2026">Species in 2026</span></div>
+        <div class="ebird-stat"><span class="ebird-stat-num">101</span><span class="ebird-stat-label" data-en="Species in Sep 2026" data-es="Especies en sep 2026">Species in Sep 2026</span></div>
+      </div>
+      <h4 class="ebird-subtitle" data-en="10 Most Recent Sightings" data-es="10 Avistamientos Más Recientes">10 Most Recent Sightings</h4>
+      <ol class="ebird-recent">
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Crested Owl</span><em>Lophostrix cristata</em></span><span class="ebird-date" data-en="23 Sep 2026" data-es="23 sep 2026">23 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Spectacled Owl</span><em>Pulsatrix perspicillata</em></span><span class="ebird-date" data-en="23 Sep 2026" data-es="23 sep 2026">23 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Velvety Manakin</span><em>Lepidothrix velutina</em></span><span class="ebird-date" data-en="19 Sep 2026" data-es="19 sep 2026">19 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Mottled Owl</span><em>Strix virgata</em></span><span class="ebird-date" data-en="16 Sep 2026" data-es="16 sep 2026">16 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Crested Guan</span><em>Penelope purpurascens</em></span><span class="ebird-date" data-en="16 Sep 2026" data-es="16 sep 2026">16 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Marbled Wood-Quail</span><em>Odontophorus gujanensis</em></span><span class="ebird-date" data-en="16 Sep 2026" data-es="16 sep 2026">16 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Common Pauraque</span><em>Nyctidromus albicollis</em></span><span class="ebird-date" data-en="16 Sep 2026" data-es="16 sep 2026">16 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Long-billed Hermit</span><em>Phaethornis longirostris</em></span><span class="ebird-date" data-en="16 Sep 2026" data-es="16 sep 2026">16 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Great Tinamou</span><em>Tinamus major</em></span><span class="ebird-date" data-en="8 Sep 2026" data-es="8 sep 2026">8 Sep 2026</span></li>
+          <li><span class="ebird-bird"><span class="ebird-bird-name">Short-billed Pigeon</span><em>Patagioenas nigrirostris</em></span><span class="ebird-date" data-en="8 Sep 2026" data-es="8 sep 2026">8 Sep 2026</span></li>
+      </ol>
+      <p class="ebird-updated" data-en="Source: eBird, updated 23 Sep 2026" data-es="Fuente: eBird, actualizado el 23 sep 2026">Source: eBird, updated 23 Sep 2026</p>
+      <div class="ebird-links">
+        <a class="btn btn-gold" href="https://ebird.org/hotspot/L18725668/bird-list" target="_blank" rel="noopener" data-en="See our Refugio Madreselva Bird List" data-es="Vea la Lista de Aves de Refugio Madreselva">See our Refugio Madreselva Bird List</a>
       </div>
     </div>
   </div>
